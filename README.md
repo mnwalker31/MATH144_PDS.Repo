@@ -11,9 +11,14 @@ Included below is a pair of side-by-side bar charts comparing the counts of lead
 ##Analysis
 While the total count of lsls across both zipcodes is relatively equal, there are far more non-lsls in the 12601 zipcode. I created a table with these counts and calculated the equivalent proportions: 
 
-   | Line Material | Zipcode | Counts |
-    | ----------- | ----- | ---- |
-    | Lead         | 12601  | 144  |
-    | Other        | 12601  | 1277 |
-    | Lead         | 12603  | 142  |
-    | Other        | 12603  | 4028 |
+
+| Line Material | Zipcode | Counts |
+| ------------- | ------- | ------ |
+| Lead         | 12601  | 144  |
+| Other        | 12601  | 1277 |
+| Lead         | 12603  | 142  |
+| Other        | 12603  | 4028 |
+
+The resulting proportions indicate that while 3.5% of service lines in the 12603 zipcodes are confirmed to contain lead, 11.3% of the service lines in 12601 contain lead. These percentages indicate that a disproportionate amount of service lines within this zipcode contain lead, despite the fact that the actual amounts are relatively equal. Analyzing both the redlining map and the current zipcode map, it is clear that the 12601 zipcode services a much smaller area than the 12603 neighborhoods. The 12601 zipcode lines also relatively closely follow the boundaries of the most severely redlined districts, where property values were lowered by poor infrastructure and higher levels of racial diversity. While this correlation is likely correlated to many other factors and other data points, the data appears to corroborate that this aging infrastructure remains most prevalent in areas inhabited by more diverse and lower-income groups. 
+
+
