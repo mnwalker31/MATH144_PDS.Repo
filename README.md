@@ -12,7 +12,7 @@ Included below is a pair of side-by-side bar charts comparing the counts of lead
 While the total count of lsls across both zipcodes is relatively equal, there are far more non-lsls in the 12601 zipcode. I created a table with these counts and calculated the equivalent proportions: 
 
    | Line Material | Zipcode | Counts |
-    | :----------- | :-----: | ----: |
+    | ----------- | ----- | ---- |
     | Lead         | 12601  | 144  |
     | Other        | 12601  | 1277 |
     | Lead         | 12603  | 142  |
