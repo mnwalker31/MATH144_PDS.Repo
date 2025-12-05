@@ -1,8 +1,18 @@
 # MATH144.PDS.Repo
 
-## Introduction
+## Motivating Question
 
-This personal data set compiles data about lead service lines (lsls) in two zipcodes covering both the town and city of Poughkeepsie. Although it has been determined that Poughkeepsie does indeed still have lead pipes, I was curious whether or not they are disproportionately distributed throughout the region. The data has been scraped from New York State Department of Health's 2025 Lead Service Line Inventory. I did my best to pull as much data as possible, but the filters prevented me from isolating rows by geographic location, meaning I had to compile the data based on various conditions. I downloaded the separate CSV files into excel, filtered out all rows corresponding to Poughkeepsie (and other derivative spellings), and combined them into one singlular database. Once compiled, I did very little secondary processing, as the data I needed was relatively clean, and the presence of missing values did not hinder my investigation. I also pulled data from interactive maps, including the University of Richmond's Mapping Inequality redlining map, their social vulnerability map, and zipcode information from unitedstateszipcodes.org. The compiled datasets and my process are included below. 
+Since coming to Poughkeepsie to attend Vassar, I've heard people discuss whether or not lead is present in the water. In 2024, Governor Kathy Hochul and State Representative Pat Ryan announced a [twelve million dollar](https://www.governor.ny.gov/news/governor-hochul-and-representative-ryan-announce-12-million-state-grant-replace-lead-water) state grant to begin to replace lead water pipes throughout Poughkeepsie. I became curious as to wheter or not these service lines are disproportionately distributed throughout the region. The city of Poughkeepsie has a history of redlining, and old infrastructure like water service lines are rarely replaced. To that extent, I searched for data that might point to a relationship between existing lead infrastructure and historical districting. 
+
+## Data
+
+The data has been compiled together from the New York State Department of Health's [2025 Lead Service Line Inventory](https://health.data.ny.gov/Health/New-York-State-Lead-Service-Line-Inventory/j63k-4n92/about_data). I also pulled data from interactive maps, including the University of Richmond's [Mapping Inequality](https://dsl.richmond.edu/panorama/redlining/) redlining map, their [social vulnerability map](https://dsl.richmond.edu/socialvulnerability/map/#loc=13/41.691/-73.915&city=poughkeepsie-ny), and [zipcode](https://www.unitedstateszipcodes.org/) maps. The compiled datasets and my process are included below. 
+
+## Data Processing
+
+The town and city of Poughkeepsie both have individual lead service line inventories, but they were nearly impossible to accurately convert to usable file types. Instead I did my best to pull from the state database. Given that the database has over 4.5 million entries, the whole thing was too large for me to export into Excel.  While the database lets users narrow down the dataset by the material and verification method of the service lines, there is no option for isolating rows by geographic location. This meant that in compiling a dataset, I was required to pull data from the entire state categorized by these various filters. This proved to be incredibly challenging as the filters were poorly organized and redundant. Ultimately I discovered that they did not call up entirely accurate subsets of data as well.  
+
+I downloaded CSV files separated by material and material verification into excel, filtered out all rows corresponding to Poughkeepsie (and other derivative spellings), and combined them into one singlular database. Once compiled, I did very little secondary processing because the data I needed was relatively clean, and the presence of missing values did not hinder my investigation.
 
 ## Visualization
 
