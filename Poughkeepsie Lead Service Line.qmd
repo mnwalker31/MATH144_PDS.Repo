@@ -1,0 +1,132 @@
+---
+title: "Poughkeepsie Lead Service Line PDP"
+author: "Mia Walker"
+format: pdf
+editor: visual
+---
+
+## Lead Service Line Initial Processing
+
+```{r load}
+
+library(tidyverse)
+
+pdp <- read.csv("Doing This One (1).csv")
+head(pdp)
+
+
+
+```
+
+I started by loading in the data and attempting to create an initial smaller data frame which filtered out groups of service lines based on whether or not they were confirmed to contain lead.
+
+```{r smaller filter}
+true_lead_by_zip <- pdp %>%
+  filter(pdp$Current.Public.Side.SL.Material == "Lead including lead-lined galvanized")
+
+head(true_lead_by_zip)
+```
+
+I created an initial bar chart based on the data frame above. It appears that both zip codes have very similar counts of total confirmed lead service lines.
+
+```{r visual}
+
+ggplot(true_lead_by_zip, aes(x=Current.Public.Side.SL.Material)) + geom_bar() + facet_wrap(~Zip.Code)
+```
+
+```{r summary}
+
+pdp <- pdp %>%
+  mutate(lead.counts = if_else(pdp$Current.Public.Side.SL.Material == "Lead including lead-lined galvanized", (1), (0)))
+
+pdp <- pdp %>%
+  mutate(lead.category = if_else(pdp$lead.counts == 1, ("Lead"), ("Not")))
+         
+```
+
+I returned to the initial data set to understand these counts of lead service lines in relation to all other service lines. The code above adds two columns, one with binary counts with lead = 1 and other = 0. I created a secondary column which gives these binary values categorical labels of "lead" and "not." This allows for clearer visualizations. The graph below breaks down this relationship between lead and other service lines by zip code.
+
+```{r porportion}
+
+ggplot(pdp, aes(x=lead.counts, fill=lead.category)) + geom_bar() + facet_wrap(~Zip.Code)
+```
+
+Even though the counts of lead service lines are quite comparable across both zip codes (12601 and 12603), the total proportion of lead service lines is much higher in 12601 than it is in 12603. At the same time, no data is returned for 12604, and there appears to be an entry without a zip code.
+
+```{r zipcode_check}
+
+what_is_wrong <- pdp %>%
+  filter(pdp$Zip.Code == "12604")
+
+head(what_is_wrong)
+```
+
+The 12401 zip code corresponds to Vassar College, and the surrounding property. Because this does not apply to the rest of the area, I chose to remove it from the data set. I also chose to filter out the missing entry. The code below creates a new data frame with only entries from the 12601 and 12603 zip codes.
+
+```{r fixed_shit}
+better_pdp <- pdp %>%
+  filter(pdp$Zip.Code == c("12603", "12601"))
+
+head(better_pdp)
+```
+
+I reprocessed this new data frame with the same column mutations that I had applied to the initial data frame.
+
+```{r redo_mutation_1}
+better_pdp <- better_pdp %>%
+  mutate(lead.counts = if_else(better_pdp$Current.Public.Side.SL.Material == "Lead including lead-lined galvanized", (1), (0)))
+
+```
+
+```{r redo_mutation}
+
+better_pdp <- better_pdp %>%
+  mutate(lead.category = if_else(better_pdp$lead.counts == 1, ("Lead"), ("Not")))
+  
+
+
+
+ggplot(better_pdp, aes(x=lead.counts, fill=lead.category)) + geom_bar() + facet_wrap(~Zip.Code)
+
+
+```
+
+The above visualization is a refined bar graph depicting the counts of the service lines in both zip codes. I thought it would be a good idea to calculate a table of the proportions correlating to this graph in order to more effectively cross-compare the results.
+
+```{r table}
+proportions <- count(better_pdp, by=lead.category, group = Zip.Code)
+
+write.csv(proportions, "./lead_proportions_by_zip.csv")
+
+head (proportions)
+```
+
+I standardized the results from this table of counts below.
+
+```{r math}
+
+142/4028
+
+144/1277
+
+```
+
+3.5% of the service lines are confirmed to contain lead in 12603, while 11.3% of the lines are confirmed to contain lead in 12601.
+
+All of the information and analysis above is based off of my compiled data. I wanted to take another look at the inventory, and chose to also calculate information based on the total counts from the inventory summaries on city and town websites.
+
+```{r help_me_please}
+
+city_v_town <- data.frame(
+  Type <- c("City", "Town"),
+  Total_Lines <- c(7604, 10968),
+  Lead_Lines <- c(6198, 510)
+)
+
+print(city_v_town)
+
+6198/7604
+510/10968
+```
+
+These proportions are based off of the overview of service line counts for the town and the city. This is the most accurate data in comparison to my compiled data set, which is likely missing service lines because of the complications of data extraction. To that extent the true proportion of lead service lines in the city is closer to 80% while it is 4.6% in the town. This is a rather shocking difference, which highlights the disparity in lead prevalence between the two regions.
